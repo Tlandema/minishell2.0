@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 14:27:01 by tlandema          #+#    #+#             */
-/*   Updated: 2020/01/26 14:51:04 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/03 06:28:58 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,5 @@ int8_t	terminal_reseter(void)
 	tattr.c_oflag |= (OPOST);
 	if (tcsetattr(STDIN_FILENO, TCSANOW, &tattr) == FAILURE)
 		return (FAILURE);
-	return (FAILURE);
+	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 #    By: tlandema <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by tlandema          #+#    #+#              #
-#    Updated: 2020/01/26 15:47:13 by tlandema         ###   ########.fr        #
+#    Updated: 2020/02/03 09:40:58 by tlandema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,11 +27,15 @@ SRCS_PATH = srcs
 
 SRCS =	main.c \
 		term.c \
-		cursor.c \
+		utils.c \
 		looper.c \
 		signals.c \
+		builder.c \
+		assigner.c \
 		env_init.c \
 		line_editor.c \
+		line_actions.c \
+		autocomplete.c \
 		free_functions.c \
 		prompter_printer.c \
 

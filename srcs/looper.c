@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 14:08:27 by tlandema          #+#    #+#             */
-/*   Updated: 2020/01/26 15:25:55 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/03 13:12:59 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,23 @@ static int8_t	instruction_gatherer(void)
 
 int8_t			looper(void)
 {
-	//char	**tab_f;
-	//char	**tab;
-	//int		i;
+	char	**command_tab;
+	char	**arg_tab;
+	int		i;
 	
+	i = -1;
+	arg_tab = NULL;
 	if (instruction_gatherer() == FAILURE)
 		return (FAILURE);
+	if (variable_assigner() == FAILURE)
+		return (FAILURE);
+	if ((command_tab = ft_strsplit(g_env.str, ';')) == NULL)
+		return (FAILURE);
+	while (command_tab[++i])
+	{
+		g_env.rog = 0;
+		if ((argument_finder(command_tab[i], arg_tab)) == FAILURE)
+			return (FAILURE);
+	}
 	return (SUCCESS);
 }

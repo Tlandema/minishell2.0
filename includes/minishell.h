@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 16:33:26 by tlandema          #+#    #+#             */
-/*   Updated: 2020/01/26 15:46:56 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/03 09:40:36 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	signals_initializer(void);
  **************************LOOP_FUNCTIONS***************************************
 */
 
+int8_t	looper(void);
 
 /*
  **************************PROMPT_FUNCTIONS*************************************
@@ -90,8 +91,8 @@ int8_t	terminal_reseter(void);
 */
 
 void	cursor_initializer(t_cur *cur);
-void	cursor_to_the_left(t_cur *cur);
-void	cursor_to_the_right(t_cur *cur);
+int8_t	cursor_to_the_left(t_cur *cur);
+int8_t	cursor_to_the_right(t_cur *cur);
 
 /*
  **************************UTILITY_FUNCTIONS************************************
@@ -99,6 +100,8 @@ void	cursor_to_the_right(t_cur *cur);
 
 int		number_of_column(void);
 int		printattr(int value);
+char	*get_env_variable(char *match);
+char	**copy_tab(void);
 
 /*
  **************************SIGNALS_FUNCTION*************************************
@@ -109,7 +112,12 @@ int		printattr(int value);
  **************************LINE_FUNCTIONS***************************************
 */
 
+int8_t	argument_finder(char *str, char **arg_tab);
+int8_t	variable_assigner(void);
 int8_t	line_editor(void);
+int8_t	character_deletion(t_cur *cur);
+int8_t	character_insertion(t_cur *cur, char key);
+int8_t	autocomplete_machine(t_cur *cur);
 
 /*
  *************************ERORR_FUNCTIONS**************************************

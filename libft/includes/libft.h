@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 17:04:57 by tlandema          #+#    #+#             */
-/*   Updated: 2019/08/05 15:02:45 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/03 09:47:42 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct		s_list
 char				*ft_str_join(char *str, char *str3);
 int					get_next_line(const int fd, char **line);
 char				ft_last_char(char *str);
-int					ft_join_tab(char **final_tab, char **tmp_tab, int j);
+int					ft_join_tab(char **final_tab, char **tmp_tab, int *j);
 
 int					get_next_line(const int fd, char **line);
 void				ft_quicksort(int *tab, int low, int high);
@@ -97,7 +97,7 @@ char				*ft_strtrim(char const *s);
 char				*ft_strtrim_char(char const *s, char c);
 char				**ft_strsplit(char const *s, char c);
 char				**ft_split_white(char *str);
-void				ft_tabdel(int i, char ***tab);
+void				ft_tabdel(char **tab);
 void				ft_strdel(char **as);
 void				ft_strclr(char *s);
 void				ft_striter(char *s, void (*f)(char*));

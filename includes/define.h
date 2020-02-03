@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 07:57:05 by tlandema          #+#    #+#             */
-/*   Updated: 2020/01/26 14:07:55 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/03 07:06:08 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,6 @@
 
 # define FAILURE	-1
 # define SUCCESS	0
+# define FAIL_OK	-2
 
 #endif

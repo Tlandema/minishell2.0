@@ -6,23 +6,25 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 19:34:17 by tlandema          #+#    #+#             */
-/*   Updated: 2019/03/04 10:50:50 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/03 08:25:13 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-void	ft_tabdel(int i, char ***tab)
+void	ft_tabdel(char **tab)
 {
+	int32_t	i;
+
+	i = -1;
 	if (tab == NULL)
 		return ;
-	while (i >= 0)
+	while (tab[++i])
 	{
 		ft_strclr((*tab)[i]);
 		ft_strdel(&(*tab)[i]);
-		i--;
 	}
-	free(*tab);
-	*tab = NULL;
+	free(tab);
+	tab = NULL;
 }

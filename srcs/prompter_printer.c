@@ -6,11 +6,32 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 15:13:21 by tlandema          #+#    #+#             */
-/*   Updated: 2020/01/26 15:25:13 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/03 13:12:59 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int8_t	git_printer(char *path)
+{
+	char	tmpath[PATH_MAX];
+
+	if (path == NULL || path[0] == '\0')
+		return (SUCCESS);
+	ft_strcpy(tmpath, path);
+	ft_strcat(tmpath, "/.git");
+	if (access(tmpath, X_OK) == 0)
+	{
+		if (git_checker(tmpath) == FAILURE)
+			return (FAILURE);
+		return (SUCCESS);
+	}
+	else
+	{
+		tmpath = ft_strrev(&ft_strchr(ft_strrev(path), '/')[1]);
+		if (git_printer(tmpath
+	}
+}
 
 static void	red_or_green(int rog)
 {
@@ -37,13 +58,14 @@ int8_t		prompter_printer(void)
 		ft_putstr("I'm in the depth of shell\033[39;49m)");
 		return (SUCCESS);
 	}
-	if (ft_strequ(path, (tmp = ft_get_v_env("HOME"))))
+	if (ft_strequ(path, (tmp = get_env_variable("HOME"))))
 		ft_putstr("~");
 	else
 		ft_putstr(&strrchr(path, '/')[1]);
 	ft_putstr("\033[39;49m) ");
 	if (ft_strequ(path, "/") == 0)
-		git_printer(path);
+		if (git_printer(path) == FAILURE)
+			return (FAILURE);
 	ft_strdel(&tmp);
 	return (SUCCESS);
 }

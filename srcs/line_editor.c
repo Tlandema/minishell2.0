@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 14:42:50 by tlandema          #+#    #+#             */
-/*   Updated: 2020/01/26 15:49:15 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/01/27 16:06:31 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,27 @@ int			number_of_column(void)
 int			printattr(int value)
 {
 	ft_putchar_fd((char)value, STDERR_FILENO);
-	return (0);
+	return (SUCCESS);
 }
 
 static int	key_gatherer(int64_t key, t_cur *cur)
 {
+	int8_t ret;
+
+	ret = 0;
 	if ((key > 31 && key < 127))
-		ft_ins_char(cur, (char)key);
+		ret = character_insertion(cur, (char)key);
 	else if (key == 4414235 && cur->pos < cur->length)
-		cursor_to_the_right(cur);
+		ret = cursor_to_the_right(cur);
 	else if (key == 4479771 && cur->pos != 0)
-		cursor_to_the_left(cur);
+		ret = cursor_to_the_left(cur);
 	else if (key == 127 && cur->length != 0)
-		ft_del_char(cur);
+		ret = character_deletion(cur);
 	else if (key == 9)
-		ft_autocomplete(cur);
+		ret = autocomplete_machine(cur);
 	else if (key == 10)
-		return (1);
-	return (0);
+		ret = 1;
+	return (ret);
 }
 
 int8_t		line_editor(void)
@@ -48,6 +51,7 @@ int8_t		line_editor(void)
 	int64_t	key;
 	t_cur	cur;
 	int		i;
+	int		ret;
 
 	i = 0;
 	ft_bzero(&cur, sizeof(t_cur));
@@ -56,17 +60,17 @@ int8_t		line_editor(void)
 	while (1)
 	{
 		key = 0;
-		if (read(0, &key, 8) < 0)
+		if ((ret = read(0, &key, 8)) < 0)
 			return (FAILURE);
 		if (key_gatherer(key, &cur))
 		{
 			ft_putchar('\n');
 			while (i++ < number_of_column())
-			{
 				if (tputs(tgetstr("le", NULL), 0, printattr) == FAILURE)
 					return (FAILURE);
-			}
 			return (SUCCESS);
 		}
+		else if (ret == FAILURE)
+			return (FAILURE);
 	}
 }
