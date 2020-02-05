@@ -43,23 +43,23 @@ int8_t			unsetenv_builtin(char *del, int32_t j)
 {
 	int32_t	i;
 	int32_t	ret;
-	char	***tab;
+	char	**tab;
 	char	*str;
 	char	*str_tmp;
 
 	i = -1;
-	tab = &g_env.v_env;
+	tab = g_env.v_env;
 	if ((ret = ft_check_env(del)) == SUCCESS)
 	{
-		while (*tab[++i])
+		while (tab[++i])
 		{
-			if ((str_tmp = ft_strdup(*tab[i])) == NULL)
+			if ((str_tmp = ft_strdup(tab[i])) == NULL)
 				return (FAILURE);
-			str = ft_strrev(&ft_strchr(ft_strrev(*tab[i]), '=')[1]);
+			str = ft_strrev(&ft_strchr(ft_strrev(tab[i]), '=')[1]);
 			if (!ft_strequ(del, str))
 				g_env.v_env[j++] = str_tmp;
 		}
-		ft_tabdel(*tab);
+		ft_tabdel(tab);
 	}
 	else if (ret == FAIL_OK)
 		error_message(6, NULL);

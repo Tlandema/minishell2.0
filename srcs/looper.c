@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   looper.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tlandema <tlandema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 14:08:27 by tlandema          #+#    #+#             */
-/*   Updated: 2020/02/03 13:12:59 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/05 14:30:29 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int8_t	line_parser(char **argument)
 	else if (ft_strequ(argument[0], "env") && argument[1] == NULL)
 		return (env_builtin());
 	else if (ft_strequ(argument[0], "setenv"))
-		return (setenv_builtin(argument[1], argument[2], 0));
+		return (setenv_builtin(argument[1], argument[2], -1));
 	else if (ft_strequ(argument[0], "unsetenv"))
 		return (unsetenv_builtin(argument[1], 0));
 	else if (ft_strequ(argument[0], "echo"))

@@ -15,7 +15,7 @@
 int			number_of_column(void)
 {
 	struct winsize	w;
-	
+
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 	return (w.ws_col);
 }
@@ -62,7 +62,7 @@ int8_t		line_editor(void)
 		key = 0;
 		if ((ret = read(0, &key, 8)) < 0)
 			return (FAILURE);
-		if (key_gatherer(key, &cur))
+		if ((ret = key_gatherer(key, &cur)) == RECUP_LINE)
 		{
 			ft_putchar('\n');
 			while (i++ < number_of_column())

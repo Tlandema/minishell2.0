@@ -18,5 +18,6 @@
 # define FAIL_OK	-2
 # define LEAVE		1
 # define STR_VERIF  "une verif"
+# define RECUP_LINE 1
 
 #endif

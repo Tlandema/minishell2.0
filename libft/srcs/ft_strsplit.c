@@ -46,7 +46,7 @@ static int	*ft_letters(char const *s, char c)
 	int		j;
 	int		l;
 
-	if (!(tab_i = (int*)ft_memalloc(sizeof(int) * ft_tab_size(s, c))))
+	if (!(tab_i = (int*)ft_memalloc(sizeof(int) * (ft_tab_size(s, c) + 1))))
 		return (0);
 	i = 0;
 	j = 0;

@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   autocomplete.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tlandema <tlandema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 09:49:27 by tlandema          #+#    #+#             */
-/*   Updated: 2020/02/03 02:22:28 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/05 15:57:06 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <dirent.h>
+#include <stdio.h>
 
-static int8_t	searching_in_dir(char *to_match, char *dir_name, char *add)
+static int8_t	searching_in_dir(char *to_match, char *dir_name, char **add)
 {
 	struct dirent	*dp;
 	DIR				*dirp;
@@ -24,42 +25,36 @@ static int8_t	searching_in_dir(char *to_match, char *dir_name, char *add)
 		return (SUCCESS);
 	if (!(dirp = opendir(dir_name)))
 		return (FAILURE);
-	while ((dp = readdir(dirp)) != NULL)
+	while ((dp = readdir(dirp)) != NULL && *add == NULL)
 	{
-		if (!ft_strncmp(dp->d_name, to_match, len))
-		{
-			if (!(add = ft_strdup(&dp->d_name[len])))
+		if (!ft_strncmp(to_match, dp->d_name, len))
+			if (!(*add = ft_strdup(&dp->d_name[len])))
 				return (FAILURE);
-		}
-		if (add != NULL)
-			break ;
 	}
-	if (closedir(dirp) == - 1)
+	if (closedir(dirp) == FAILURE)
 		return (FAILURE);
 	return (SUCCESS);
 }
 
-static int8_t	path_filler(char **paths)
+static int8_t	path_filler(char ***paths)
 {
 	char *tmp;
 
 	if ((tmp = get_env_variable("PATH")) && tmp == NULL)
-		return (SUCCESS);
-	if ((paths = ft_strsplit(tmp, ':')) && paths == NULL)
+		return (FAIL_OK);
+	if ((*paths = ft_strsplit(tmp, ':')) && *paths == NULL)
 		return (FAILURE);
+	ft_strdel(&tmp);
 	return (SUCCESS);
 }
 
-static int8_t	multiple_instructions(char *add)
+static int8_t	multiple_instructions(char **add)
 {
-	char	*buf;
+	char	buf[PATH_MAX];
 
-	if ((buf = ft_strnew(PATH_MAX)) && buf == NULL)
-		return (FAILURE);
 	if (searching_in_dir(&strrchr(g_env.str, ' ')[1], getcwd(buf, PATH_MAX), add)
 			== FAILURE)
 		return (FAILURE);
-	ft_strdel(&buf);
 	return (SUCCESS);
 }
 
@@ -94,20 +89,22 @@ int8_t			autocomplete_machine(t_cur *cur)
 	add = NULL;
 	i = -1;
 	if (cur->pos != cur->length || ft_last_char(str) == ' ')
-		return (SUCCESS);
-	if (path_filler(paths) == FAILURE)
+		return (FAIL_OK);
+	if (path_filler(&paths) == FAILURE)
 		return (FAILURE);
 	if (paths == NULL)
-		return (SUCCESS);
+		return (FAIL_OK);
 	if (ft_strrchr(str, ' '))
 	{
-		if (multiple_instructions(add) == FAILURE)
+		if (multiple_instructions(&add) == FAILURE)
 			return (FAILURE);
 	}
 	else
-		while (paths[++i])
-			if (searching_in_dir(str, paths[i], add) == FAILURE)
+	{
+		while (paths[++i] && add == NULL)
+			if (searching_in_dir(str, paths[i], &add) == FAILURE)
 				return (FAILURE);//free paths
+	}
 	autocomplete_helper(cur, add, paths);
 	return (SUCCESS);
 }

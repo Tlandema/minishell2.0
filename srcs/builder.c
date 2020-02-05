@@ -119,7 +119,7 @@ int8_t			argument_finder(char *str, char ***arg_tab)
 		return (FAIL_OK);
 	boolean = (str[counter] == '"') ? 1 : 0;
 	if ((tmp_tab = ft_strsplit(str, '"')) == NULL)
-		return (FAIL_OK);
+		return (FAILURE);
 	counter = argument_counter(tmp_tab, boolean);
 	if (!(*arg_tab = (char **)ft_memalloc(sizeof(char *) * (counter + 1))))
 		return (FAILURE);

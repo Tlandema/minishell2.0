@@ -14,7 +14,7 @@
 
 int8_t	setenv_builtin(char *left, char *right, int i)
 {
-	char	***tab;
+	char	**tab;
 	char	*str;
 
 	if (!left || !right || ft_strchr(left, '=') || ft_strchr(right, '='))
@@ -23,18 +23,19 @@ int8_t	setenv_builtin(char *left, char *right, int i)
 	{
 		if ((str = ft_strnew(ft_strlen(left) + ft_strlen(right) + 1)) == NULL)
 			return (FAILURE);
-		tab = &g_env.v_env;
+		tab = g_env.v_env;
 		if ((g_env.v_env = (char **)ft_memalloc(sizeof(char *)
-				* (ft_count_tab(*tab) + 2))) == NULL)
+				* (ft_count_tab(tab) + 2))) == NULL)
 			return (FAILURE);
-		while (*tab[++i])
-			if ((g_env.v_env[i] = ft_strdup(*tab[i])) == NULL)
+			ft_putchar('a');
+		while (tab[++i])
+			if ((g_env.v_env[i] = ft_strdup(tab[i])) == NULL)
 				return (FAILURE);
 		ft_strcpy(str, left);
 		ft_strcat(str, "=");
 		ft_strcat(str, right);
 		g_env.v_env[i] = str;
-		ft_tabdel(*tab);
+		ft_tabdel(tab);
 	}
 	return (SUCCESS);
 }
