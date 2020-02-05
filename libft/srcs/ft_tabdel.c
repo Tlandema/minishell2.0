@@ -22,8 +22,8 @@ void	ft_tabdel(char **tab)
 		return ;
 	while (tab[++i])
 	{
-		ft_strclr((*tab)[i]);
-		ft_strdel(&(*tab)[i]);
+		ft_strclr(tab[i]);
+		ft_strdel(&tab[i]);
 	}
 	free(tab);
 	tab = NULL;

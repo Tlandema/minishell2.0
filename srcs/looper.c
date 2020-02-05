@@ -12,6 +12,25 @@
 
 #include "minishell.h"
 
+static int8_t	line_parser(char **argument)
+{
+	if (ft_strequ(argument[0], "cd"))
+		return (cd_builtin(argument));
+	else if (ft_strequ(argument[0], "exit"))
+		return (FAILURE);
+	else if (ft_strequ(argument[0], "env") && argument[1] == NULL)
+		return (env_builtin());
+	else if (ft_strequ(argument[0], "setenv"))
+		return (setenv_builtin(argument[1], argument[2], 0));
+	else if (ft_strequ(argument[0], "unsetenv"))
+		return (unsetenv_builtin(argument[1], 0));
+	else if (ft_strequ(argument[0], "echo"))
+		return (echo_builtin(argument));
+	else
+		return (command_parsing(argument));
+	return (FAIL_OK);
+}
+
 static int8_t	instruction_gatherer(void)
 {
 	if (g_env.cat == 0)
@@ -35,7 +54,7 @@ int8_t			looper(void)
 	char	**command_tab;
 	char	**arg_tab;
 	int		i;
-	
+
 	i = -1;
 	arg_tab = NULL;
 	if (instruction_gatherer() == FAILURE)
@@ -47,8 +66,12 @@ int8_t			looper(void)
 	while (command_tab[++i])
 	{
 		g_env.rog = 0;
-		if ((argument_finder(command_tab[i], arg_tab)) == FAILURE)
+		if ((argument_finder(command_tab[i], &arg_tab)) == FAILURE)
 			return (FAILURE);
+		if (arg_tab)
+			if ((line_parser(arg_tab)) == FAILURE)
+				return (FAILURE);
 	}
+	ft_strclr(g_env.str);
 	return (SUCCESS);
 }

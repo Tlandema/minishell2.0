@@ -6,7 +6,7 @@
 #    By: tlandema <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by tlandema          #+#    #+#              #
-#    Updated: 2020/02/03 09:40:58 by tlandema         ###   ########.fr        #
+#    Updated: 2020/02/05 07:00:23 by tlandema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,17 +26,24 @@ INC = includes
 SRCS_PATH = srcs
 
 SRCS =	main.c \
+		cd.c \
+		env.c \
+		echo.c \
 		term.c \
 		utils.c \
+		error.c \
 		looper.c \
+		setenv.c \
 		signals.c \
 		builder.c \
 		assigner.c \
 		env_init.c \
+		unsetenv.c \
 		line_editor.c \
 		line_actions.c \
 		autocomplete.c \
 		free_functions.c \
+		command.c \
 		prompter_printer.c \
 
 OBJS_PATH = obj

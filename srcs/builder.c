@@ -76,17 +76,17 @@ static int32_t	argument_counter(char **tab,  uint8_t boolean)
 	return (count);
 }
 
-static int8_t	tab_filler(char **arg_tab, char **tmp_tab, uint8_t boolean)
+static int8_t	tab_filler(char ***arg_tab, char **tmp_tab, uint8_t boolean)
 {
 	char	**tmp_tab2;
 	int32_t	i;
-	int	j;
+	int		j;
 
 	i = 0;
 	j = 0;
 	if (boolean == 1)
 	{
-		if ((arg_tab[0] = ft_strdup(tmp_tab[0])) == NULL)
+		if ((*arg_tab[0] = ft_strdup(tmp_tab[0])) == NULL)
 			return (FAILURE);
 		i = 1;
 		j = 1;
@@ -95,16 +95,16 @@ static int8_t	tab_filler(char **arg_tab, char **tmp_tab, uint8_t boolean)
 	{
 		if ((tmp_tab2 = ft_split_white(tmp_tab[i])) == NULL)
 			return (FAILURE);
-		ft_join_tab(arg_tab, tmp_tab2, &j);
+		j = ft_join_tab(*arg_tab, tmp_tab2, j);
 		ft_tabdel(tmp_tab2);
 		if (tmp_tab[++i])
-			if ((arg_tab[j++] = ft_strdup(tmp_tab[i++])) == NULL)
+			if ((*arg_tab[j++] = ft_strdup(tmp_tab[i++])) == NULL)
 				return (FAILURE);
 	}
 	return (SUCCESS);
 }
 
-int8_t			argument_finder(char *str, char **arg_tab)
+int8_t			argument_finder(char *str, char ***arg_tab)
 {
 	char		**tmp_tab;
 	int32_t		counter;
@@ -121,7 +121,7 @@ int8_t			argument_finder(char *str, char **arg_tab)
 	if ((tmp_tab = ft_strsplit(str, '"')) == NULL)
 		return (FAIL_OK);
 	counter = argument_counter(tmp_tab, boolean);
-	if (!(arg_tab = (char **)ft_memalloc(sizeof(char *) * (counter + 1))))
+	if (!(*arg_tab = (char **)ft_memalloc(sizeof(char *) * (counter + 1))))
 		return (FAILURE);
 	if (tab_filler(arg_tab, tmp_tab, boolean) == FAILURE)
 		return (FAILURE);

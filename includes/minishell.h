@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 16:33:26 by tlandema          #+#    #+#             */
-/*   Updated: 2020/02/03 09:40:36 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/05 05:41:38 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 typedef struct		s_env
 {
-	
+
 	char			**v_env;
 	char			*old_pwd;
 	char			str[PATH_MAX];
@@ -67,11 +67,17 @@ int8_t	prompter_printer(void);
  **************************BUILTIN_FUNCTIONS************************************
 */
 
+int8_t	cd_builtin(char **args);
+int8_t	setenv_builtin(char *left, char *right, int i);
+int8_t	unsetenv_builtin(char *del, int32_t j);
+int8_t	echo_builtin(char **tab);
+int8_t	env_builtin(void);
 
 /*
  **************************EXEC_FUNCTION****************************************
 */
 
+int8_t		command_parsing(char **arg);
 
 /*
  **************************FREE_FUNCTIONS***************************************
@@ -112,7 +118,7 @@ char	**copy_tab(void);
  **************************LINE_FUNCTIONS***************************************
 */
 
-int8_t	argument_finder(char *str, char **arg_tab);
+int8_t	argument_finder(char *str, char ***arg_tab);
 int8_t	variable_assigner(void);
 int8_t	line_editor(void);
 int8_t	character_deletion(t_cur *cur);
@@ -123,5 +129,6 @@ int8_t	autocomplete_machine(t_cur *cur);
  *************************ERORR_FUNCTIONS**************************************
 */
 
+void	error_message(int i, char *name);
 
 #endif

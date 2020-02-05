@@ -11,6 +11,30 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <fcntl.h>
+
+static int8_t	git_checker(char *tmpath)
+{
+	int		fd;
+	char	*str;
+
+	ft_strcat(tmpath,"/HEAD");
+	if (access(tmpath, R_OK) != 0)
+		return (FAILURE);
+	if ((fd = open(tmpath, O_RDONLY)) == -1)
+		return (FAILURE);
+	if (get_next_line(fd, &str) == -1)
+		return (FAILURE);
+	if (close(fd) == -1)
+		return (FAILURE);
+	ft_putstr("git:(\033[31;49m");
+	ft_putstr(&ft_strchr(&ft_strchr(str, '/')[1], '/')[1]);
+	if (ft_strstr(str, "ref : refs/heads/"))
+		ft_putstr(ft_strchr(ft_strchr(str, '/'), '/'));
+	ft_putstr("\033[39;49m) ");
+	ft_strdel(&str);
+	return (SUCCESS);
+}
 
 static int8_t	git_printer(char *path)
 {
@@ -28,9 +52,12 @@ static int8_t	git_printer(char *path)
 	}
 	else
 	{
-		tmpath = ft_strrev(&ft_strchr(ft_strrev(path), '/')[1]);
-		if (git_printer(tmpath
+		ft_strclr(tmpath);
+		ft_strcpy(tmpath, ft_strrev(&ft_strchr(ft_strrev(path), '/')[1]));
+		if (git_printer(tmpath) == FAILURE)
+			return (FAILURE);
 	}
+	return (SUCCESS);
 }
 
 static void	red_or_green(int rog)
