@@ -6,7 +6,7 @@
 /*   By: tlandema <tlandema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 16:33:26 by tlandema          #+#    #+#             */
-/*   Updated: 2020/02/06 16:28:20 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/06 19:34:55 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ typedef struct		s_env
 	char			str[PATH_MAX];
 	int				cat;
 	int				rog;
-	int				pos;
+	int				*pos;
+	int				*length;
 }					t_env;
 
 typedef struct		s_cur

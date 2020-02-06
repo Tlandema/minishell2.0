@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_editor.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tlandema <tlandema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 14:42:50 by tlandema          #+#    #+#             */
-/*   Updated: 2020/01/27 16:06:31 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/06 19:34:33 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ int8_t		line_editor(void)
 	i = 0;
 	ft_bzero(&cur, sizeof(t_cur));
 	cursor_initializer(&cur);
-	g_env.pos = cur.pos;
+	g_env.pos = &cur.pos;
+	g_env.length = &cur.length;
 	while (1)
 	{
 		key = 0;

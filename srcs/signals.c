@@ -6,7 +6,7 @@
 /*   By: tlandema <tlandema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 10:47:47 by tlandema          #+#    #+#             */
-/*   Updated: 2020/02/05 16:21:24 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/06 19:35:53 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,14 @@ static void	int_signal_handler(void)
 	ft_putchar('\n');
 	while (i++ < number_of_column())
 		tputs(tgetstr("le", NULL), 0, printattr);
-	prompter_printer();
-	if (g_env.cat == 1)
-		g_env.cat = -1;
+	if (g_env.cat != 1)
+	{
+		prompter_printer();
+		g_env.cat = 0;
+	}
 	g_env.rog = 0;
-	g_env.pos = 0;
+	*g_env.pos = 0;
+	*g_env.length = 0;
 	ft_strclr(g_env.str);
 }
 
