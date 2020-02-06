@@ -6,7 +6,7 @@
 /*   By: tlandema <tlandema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 15:39:43 by tlandema          #+#    #+#             */
-/*   Updated: 2020/02/06 07:47:43 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/06 19:53:02 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	cursor_initializer(t_cur *cur)
 	char	answer[20];
 	int		i;
 
+	g_env.pos = &cur->pos;
+	g_env.length = &cur->length;
 	ft_putstr_fd("\e[6n", 0);
 	ft_bzero(answer, 20);
 	i = read(0, answer, 20);
