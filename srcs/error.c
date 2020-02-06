@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tlandema <tlandema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 12:12:44 by tlandema          #+#    #+#             */
-/*   Updated: 2019/08/01 15:29:39 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/06 08:37:46 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ static void	error_message2(int i, char *name)
 		ft_putstr("TomTomshell: permission denied: ");
 		ft_putendl(name);
 	}
+	else if (i == 11)
+	{
+		ft_putendl("You are lost ? Use cd to go back to the home directory !");
+	}
 }
 
 void		error_message(int i, char *name)
@@ -42,7 +46,7 @@ void		error_message(int i, char *name)
 	g_env.rog = 1;
 	if (i == 1)
 		ft_putstr("cd: too many arguments\n");
-	else if (i == 2)
+	else if (i == 2 && name)
 	{
 		if (!access(name, F_OK) && access(name, X_OK) == -1)
 			ft_putstr("cd: permission denied: ");

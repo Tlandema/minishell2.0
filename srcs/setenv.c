@@ -6,18 +6,29 @@
 /*   By: tlandema <tlandema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 13:50:09 by tlandema          #+#    #+#             */
-/*   Updated: 2020/02/05 16:21:53 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/06 08:38:27 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int8_t	setenv_builtin(char *left, char *right, int i)
+static int8_t	check_setenv_in_cd(char *left, char *right, int i)
+{
+	if (!right)
+		error_message(11, NULL);
+	else
+		return (setenv_builtin(left, right, i));
+	return (FAIL_OK);
+}
+
+int8_t			setenv_builtin(char *left, char *right, int i)
 {
 	char	**tab;
 	char	*str;
 
-	if (!left || !right || ft_strchr(left, '=') || ft_strchr(right, '='))
+	if (i == 0)
+		return (check_setenv_in_cd(left, right, -1));
+	if (!right || !left || ft_strchr(left, '=') || ft_strchr(right, '='))
 		error_message(5, NULL);
 	else
 	{

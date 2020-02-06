@@ -6,7 +6,7 @@
 /*   By: tlandema <tlandema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 06:12:25 by tlandema          #+#    #+#             */
-/*   Updated: 2020/02/05 16:25:35 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/06 10:17:15 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int8_t	dollar_replacer(char *str, int i)
 	}
 	k = ft_strlen(tmp);
 	ft_memmove(&str[j + k], &str[i], ft_strlen(&str[i]));
-	ft_strcpy(&str[j], tmp);
+	ft_strncpy(&str[j], tmp, k);
 	ft_strdel(&tmp);
 	ft_strdel(&word);
 	return (SUCCESS);
@@ -43,11 +43,11 @@ static int8_t	tild_replacer(char *str, int i)
 	char	*tmp;
 	int		len;
 
-	if ((tmp = get_env_variable("HOME")))
+	if ((tmp = get_env_variable("HOME")) == NULL)
 		return (FAIL_OK);
 	len = ft_strlen(tmp);
 	ft_memmove(&str[i + len], &str[i + 1], ft_strlen(&str[i + 1]));
-	ft_strcpy(&str[i], tmp);
+	ft_strncpy(&str[i], tmp, len);
 	ft_strdel(&tmp);
 	return (SUCCESS);
 }
@@ -69,8 +69,8 @@ int8_t			variable_assigner(void)
 				return (FAILURE);
 		}
 		else if (str[i] == '~')
-			if (tild_replacer(str, i) == FAILURE)
-				return (FAILURE);
+			if (tild_replacer(str, i) == FAIL_OK)
+				return (FAIL_OK);
 	}
 	return (SUCCESS);
 }

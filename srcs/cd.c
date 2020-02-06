@@ -6,7 +6,7 @@
 /*   By: tlandema <tlandema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 12:08:48 by tlandema          #+#    #+#             */
-/*   Updated: 2020/02/06 07:42:51 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/06 10:19:52 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,15 @@
 static int8_t	cd_helper(int8_t ret, char *str)
 {
 	char	buff[PATH_MAX];
+	char	*pwd;
 
-	if (getenv("PWD"))
+	pwd = NULL;
+	if ((pwd = get_env_variable("PWD")) != NULL)
+	{
 		unsetenv_builtin("PWD", 0);
-	setenv_builtin("PWD", getcwd(buff, PATH_MAX), -1);
+		ft_strdel(&pwd);
+	}
+	setenv_builtin("PWD", getcwd(buff, PATH_MAX), 0);
 	ft_strdel(&str);
 	return (ret);
 }
@@ -47,7 +52,7 @@ static void		replace_in_pwd(char *str, char *to_rep, char *rep_by)
 	ft_strcat(copy, rep_by);
 	i = i + ft_strlen(to_rep);
 	ft_strcat(copy, &str[i]);
-	if (move_dir(copy) == FAILURE)
+	if (move_dir(copy) == FAIL_OK)
 		error_message(2, copy);
 }
 
@@ -73,29 +78,33 @@ static int8_t	cd_2_arg(char **args)
 		else
 			error_message(3, args[1]);
 	}
-	return (FAIL_OK);
+	return (SUCCESS);
 }
 
 int8_t			cd_builtin(char **args)
 {
 	int32_t i;
 	char	*tmp;
+	int8_t	ret;
 
 	tmp = NULL;
+	ret = 0;
 	i = ft_count_tab(args);
 	if (i > 3)
 		error_message(1, NULL);
 	else if (i == 3)
-		return (cd_helper(cd_2_arg(args), NULL));
+		ret = cd_helper(cd_2_arg(args), NULL);
 	else if (args[1] == NULL)
 	{
 		if ((tmp = get_env_variable("HOME")) == NULL)
-			return (FAILURE);
-		return (cd_helper(move_dir(tmp), tmp));
+			return (FAIL_OK);
+		ret = cd_helper(move_dir(tmp), tmp);
 	}
 	else if (ft_strequ(args[1], "-"))
-		return (cd_helper(move_dir(g_env.old_pwd), NULL));
+		ret = cd_helper(move_dir(g_env.old_pwd), NULL);
 	else
-		return (cd_helper(move_dir(args[1]), NULL));
-	return (SUCCESS);
+		ret = cd_helper(move_dir(args[1]), NULL);
+	if (ret == FAIL_OK)
+		error_message(2, args[1]);
+	return (ret);
 }
