@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   define.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tlandema <tlandema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 07:57:05 by tlandema          #+#    #+#             */
-/*   Updated: 2020/02/03 07:06:08 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/06 07:48:44 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINE_H
-# define MINISHELL_H
+# define DEFINE_H
 
 # define FAILURE	-1
 # define SUCCESS	0

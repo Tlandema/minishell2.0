@@ -6,7 +6,7 @@
 /*   By: tlandema <tlandema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 09:49:27 by tlandema          #+#    #+#             */
-/*   Updated: 2020/02/05 15:57:06 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/06 07:43:25 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,19 @@ static int8_t	multiple_instructions(char **add)
 {
 	char	buf[PATH_MAX];
 
-	if (searching_in_dir(&strrchr(g_env.str, ' ')[1], getcwd(buf, PATH_MAX), add)
-			== FAILURE)
+	if (searching_in_dir(&strrchr(g_env.str, ' ')[1],
+			getcwd(buf, PATH_MAX), add) == FAILURE)
 		return (FAILURE);
 	return (SUCCESS);
 }
 
-void			autocomplete_helper(t_cur *cur, char *add, char **paths)
+static int8_t	autocomplete_helper(t_cur *cur, char *add, char **paths)
 {
 	int i;
 
 	i = 0;
 	if (add == NULL)
-		return ;
+		return (FAIL_OK);
 	while (add[i])
 	{
 		character_insertion(cur, add[i]);
@@ -75,6 +75,7 @@ void			autocomplete_helper(t_cur *cur, char *add, char **paths)
 		ft_strdel(&paths[i++]);
 	ft_memdel((void **)&paths);
 	ft_strdel(&add);
+	return (SUCCESS);
 }
 
 int8_t			autocomplete_machine(t_cur *cur)
@@ -98,13 +99,10 @@ int8_t			autocomplete_machine(t_cur *cur)
 	{
 		if (multiple_instructions(&add) == FAILURE)
 			return (FAILURE);
+		return (autocomplete_helper(cur, add, paths));
 	}
-	else
-	{
-		while (paths[++i] && add == NULL)
-			if (searching_in_dir(str, paths[i], &add) == FAILURE)
-				return (FAILURE);//free paths
-	}
-	autocomplete_helper(cur, add, paths);
-	return (SUCCESS);
+	while (paths[++i] && add == NULL)
+		if (searching_in_dir(str, paths[i], &add) == FAILURE)
+			return (tabdel_ret(paths, FAILURE));
+	return (autocomplete_helper(cur, add, paths));
 }

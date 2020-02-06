@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tlandema <tlandema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 16:09:46 by tlandema          #+#    #+#             */
-/*   Updated: 2020/02/03 08:25:51 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/05 16:19:11 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ static char	**free_copy(char **tab)
 
 char		**copy_tab(void)
 {
-    int		i;
-    char	**copy;
+	int		i;
+	char	**copy;
 
 	i = ft_count_tab(g_env.v_env);
 	if (!(copy = (char **)ft_memalloc(sizeof(char *) * (i + 1))))

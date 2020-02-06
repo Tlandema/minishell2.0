@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompter_printer.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tlandema <tlandema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 15:13:21 by tlandema          #+#    #+#             */
-/*   Updated: 2020/02/03 13:12:59 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/05 16:22:30 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int8_t	git_checker(char *tmpath)
 	int		fd;
 	char	*str;
 
-	ft_strcat(tmpath,"/HEAD");
+	ft_strcat(tmpath, "/HEAD");
 	if (access(tmpath, R_OK) != 0)
 		return (FAILURE);
 	if ((fd = open(tmpath, O_RDONLY)) == -1)
@@ -60,7 +60,7 @@ static int8_t	git_printer(char *path)
 	return (SUCCESS);
 }
 
-static void	red_or_green(int rog)
+static void		red_or_green(int rog)
 {
 	if (rog)
 		ft_putstr("\033[91m");
@@ -69,7 +69,7 @@ static void	red_or_green(int rog)
 	ft_putstr("Tsh \033[39m(\033[96m");
 }
 
-int8_t		prompter_printer(void)
+int8_t			prompter_printer(void)
 {
 	char path[PATH_MAX];
 	char *tmp;

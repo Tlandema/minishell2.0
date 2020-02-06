@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tlandema <tlandema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 10:47:47 by tlandema          #+#    #+#             */
-/*   Updated: 2020/01/26 15:28:02 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/05 16:21:24 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 static void	stop_signal_handler(void)
 {
 	terminal_reseter();
-	exit (1);
+	exit(1);
 }
 
 static void	int_signal_handler(void)

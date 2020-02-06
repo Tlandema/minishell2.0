@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assigner.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tlandema <tlandema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 06:12:25 by tlandema          #+#    #+#             */
-/*   Updated: 2020/02/03 09:50:55 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/05 16:25:35 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,14 @@ int8_t			variable_assigner(void)
 {
 	int		i;
 	char	*str;
-	
+
 	i = -1;
 	str = g_env.str;
 	while (str[++i])
 	{
 		if (i > PATH_MAX - 100)
 			return (SUCCESS);
-		if (str[i] == '$' && (str[i + 1] != ' ' && str[i  + 1] != '\0'))
+		if (str[i] == '$' && (str[i + 1] != ' ' && str[i + 1] != '\0'))
 		{
 			if (dollar_replacer(str, i) == FAILURE)
 				return (FAILURE);

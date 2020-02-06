@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   term.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tlandema <tlandema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 14:27:01 by tlandema          #+#    #+#             */
-/*   Updated: 2020/02/03 06:28:58 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/05 16:20:45 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 int8_t	terminal_initializer(void)
 {
 	struct termios	tattr;
-	
+
 	if (tgetent(NULL, getenv("TERM")) < 1)
 	{
 		ft_putstr("\nThe terminal wille not work since it doesn't have a n en");
 		ft_putendl("vironment variable called TERM set to a logical value.");
-		return(FAILURE);
+		return (FAILURE);
 	}
 	if (tcgetattr(STDIN_FILENO, &tattr) == FAILURE)
 		return (FAILURE);

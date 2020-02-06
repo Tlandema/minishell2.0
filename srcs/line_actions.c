@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_actions.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tlandema <tlandema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 15:39:43 by tlandema          #+#    #+#             */
-/*   Updated: 2020/02/03 02:14:20 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/06 07:47:43 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@ int8_t	character_insertion(t_cur *cur, char key)
 		return (SUCCESS);
 	ft_memmove(str + cur->pos + 1, str + cur->pos, PATH_MAX - cur->pos - 1);
 	str[cur->pos] = key;
-	tputs(tgetstr("im", NULL), 1, printattr);
+	if (tputs(tgetstr("im", NULL), 1, printattr) == FAILURE)
+		return (FAILURE);
 	ft_putchar_fd(key, 0);
-	tputs(tgetstr("ei", NULL), 1, printattr);
+	if (tputs(tgetstr("ei", NULL), 1, printattr) == FAILURE)
+		return (FAILURE);
 	cur->length++;
 	cur->pos++;
 	return (SUCCESS);
@@ -49,14 +51,16 @@ void	cursor_initializer(t_cur *cur)
 
 int8_t	cursor_to_the_left(t_cur *cur)
 {
-	tputs(tgetstr("le", NULL), 1, printattr);
+	if (tputs(tgetstr("le", NULL), 1, printattr) == FAILURE)
+		return (FAILURE);
 	cur->pos--;
 	return (SUCCESS);
 }
 
 int8_t	cursor_to_the_right(t_cur *cur)
 {
-	tputs(tgetstr("nd", NULL), 1, printattr);
+	if (tputs(tgetstr("nd", NULL), 1, printattr) == FAILURE)
+		return (FAILURE);
 	cur->pos++;
 	return (SUCCESS);
 }
@@ -67,14 +71,20 @@ int8_t	character_deletion(t_cur *cur)
 
 	str = g_env.str;
 	if (cur->pos != 0)
-		cursor_to_the_left(cur);
+	{
+		if (cursor_to_the_left(cur) == FAILURE)
+			return (FAILURE);
+	}
 	else
 		return (SUCCESS);
 	ft_memmove(str + cur->pos, str + cur->pos + 1, PATH_MAX - cur->pos - 1);
-	tputs(tgetstr("cd", NULL), 0, printattr);//protect
-	tputs(tgetstr("sc", NULL), 0, printattr);
+	if (tputs(tgetstr("cd", NULL), 0, printattr) == FAILURE)
+		return (FAILURE);
+	if (tputs(tgetstr("sc", NULL), 0, printattr) == FAILURE)
+		return (FAILURE);
 	ft_putstr_fd(str + cur->pos, 0);
-	tputs(tgetstr("rc", NULL), 0, printattr);
+	if (tputs(tgetstr("rc", NULL), 0, printattr) == FAILURE)
+		return (FAILURE);
 	cur->length--;
 	return (SUCCESS);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builder.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tlandema <tlandema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 07:48:00 by tlandema          #+#    #+#             */
-/*   Updated: 2020/02/03 09:49:24 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/06 07:39:31 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int32_t	count_word_number(char *str)
 	return (tab_size);
 }
 
-static int32_t	argument_counter(char **tab,  uint8_t boolean)
+static int32_t	argument_counter(char **tab, uint8_t boolean)
 {
 	int32_t count;
 	int32_t	i;

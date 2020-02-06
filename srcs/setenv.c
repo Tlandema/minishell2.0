@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setenv.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tlandema <tlandema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 13:50:09 by tlandema          #+#    #+#             */
-/*   Updated: 2019/08/03 17:06:16 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/05 16:21:53 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int8_t	setenv_builtin(char *left, char *right, int i)
 		if ((g_env.v_env = (char **)ft_memalloc(sizeof(char *)
 				* (ft_count_tab(tab) + 2))) == NULL)
 			return (FAILURE);
-			ft_putchar('a');
 		while (tab[++i])
 			if ((g_env.v_env[i] = ft_strdup(tab[i])) == NULL)
 				return (FAILURE);

@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tlandema <tlandema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 15:17:59 by tlandema          #+#    #+#             */
-/*   Updated: 2019/08/03 17:44:07 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/05 16:24:08 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	path_former(char *buff, char *path, char *arg)
+static void		path_former(char *buff, char *path, char *arg)
 {
 	ft_strcpy(buff, path);
 	ft_strcat(buff, "/");
 	ft_strcat(buff, arg);
 }
 
-static int	exec_helper(char **com_arg, char **paths, int i)
+static int		exec_helper(char **com_arg, char **paths, int i)
 {
 	char	str[PATH_MAX];
 	int		check;
@@ -68,7 +68,7 @@ static int8_t	check_and_exec(char **com_arg, char **paths)
 	return (check);
 }
 
-int8_t		command_parsing(char **arg)
+int8_t			command_parsing(char **arg)
 {
 	char	*paths_tmp;
 	char	**paths;
