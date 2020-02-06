@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 13:50:09 by tlandema          #+#    #+#             */
-/*   Updated: 2019/08/03 17:06:16 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/06 11:38:46 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ int8_t			unsetenv_builtin(char *del, int32_t j)
 			str = ft_strrev(&ft_strchr(ft_strrev(tab[i]), '=')[1]);
 			if (!ft_strequ(del, str))
 				g_env.v_env[j++] = str_tmp;
+			else
+				ft_strdel(&str_tmp);
 		}
 		ft_tabdel(tab);
 	}

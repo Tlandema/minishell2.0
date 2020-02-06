@@ -6,7 +6,7 @@
 /*   By: tlandema <tlandema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 09:49:27 by tlandema          #+#    #+#             */
-/*   Updated: 2020/02/06 07:43:25 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/06 15:29:08 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ static int8_t	autocomplete_helper(t_cur *cur, char *add, char **paths)
 	int i;
 
 	i = 0;
+	ft_tabdel(paths);
 	if (add == NULL)
 		return (FAIL_OK);
 	while (add[i])
@@ -71,9 +72,6 @@ static int8_t	autocomplete_helper(t_cur *cur, char *add, char **paths)
 		i++;
 	}
 	i = 0;
-	while (paths[i])
-		ft_strdel(&paths[i++]);
-	ft_memdel((void **)&paths);
 	ft_strdel(&add);
 	return (SUCCESS);
 }

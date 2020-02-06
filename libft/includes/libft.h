@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tlandema <tlandema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 17:04:57 by tlandema          #+#    #+#             */
-/*   Updated: 2020/02/05 08:00:10 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/06 14:38:22 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ char				**ft_split_white(char *str);
 void				ft_tabdel(char **tab);
 void				ft_strdel(char **as);
 void				ft_strclr(char *s);
+void				ft_strnclr(char *str, int n);
+
 void				ft_striter(char *s, void (*f)(char*));
 void				ft_striteri(char *s, void (*f)(unsigned int, char*));
 

@@ -6,7 +6,7 @@
 /*   By: tlandema <tlandema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 15:17:59 by tlandema          #+#    #+#             */
-/*   Updated: 2020/02/05 16:24:08 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/06 11:28:11 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int8_t			command_parsing(char **arg)
 	}
 	if ((check = check_and_exec(arg, paths)) != SUCCESS)
 		error_message(check, arg[0]);
-	if (paths_tmp)
+	if (paths)
 		ft_tabdel(paths);
 	ft_strdel(&paths_tmp);
 	return (SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: tlandema <tlandema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 07:48:00 by tlandema          #+#    #+#             */
-/*   Updated: 2020/02/06 07:39:31 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/06 16:34:16 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static int8_t	tab_filler(char ***arg_tab, char **tmp_tab, uint8_t boolean)
 	j = 0;
 	if (boolean == 1)
 	{
-		if ((*arg_tab[0] = ft_strdup(tmp_tab[0])) == NULL)
+		if (((*arg_tab)[0] = ft_strdup(tmp_tab[0])) == NULL)
 			return (FAILURE);
 		i = 1;
 		j = 1;
@@ -98,7 +98,7 @@ static int8_t	tab_filler(char ***arg_tab, char **tmp_tab, uint8_t boolean)
 		j = ft_join_tab(*arg_tab, tmp_tab2, j);
 		ft_tabdel(tmp_tab2);
 		if (tmp_tab[++i])
-			if ((*arg_tab[j++] = ft_strdup(tmp_tab[i++])) == NULL)
+			if (((*arg_tab)[j++] = ft_strdup(tmp_tab[i++])) == NULL)
 				return (FAILURE);
 	}
 	return (SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: tlandema <tlandema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 12:08:48 by tlandema          #+#    #+#             */
-/*   Updated: 2020/02/06 10:19:52 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/06 15:23:34 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,16 @@ static int8_t	cd_helper(int8_t ret, char *str)
 
 static int8_t	move_dir(char *str)
 {
+	char	cpy[PATH_MAX];
+
 	if (!access(str, X_OK))
 	{
+		ft_strcpy(cpy, str);
+		if (str == g_env.old_pwd)
+			ft_putendl(str);
 		ft_strclr(g_env.old_pwd);
 		g_env.old_pwd = getcwd(g_env.old_pwd, PATH_MAX);
-		chdir(str);
+		chdir(cpy);
 	}
 	else
 		return (FAIL_OK);

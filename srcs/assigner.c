@@ -6,7 +6,7 @@
 /*   By: tlandema <tlandema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 06:12:25 by tlandema          #+#    #+#             */
-/*   Updated: 2020/02/06 10:17:15 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/06 17:00:10 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ static int8_t	dollar_replacer(char *str, int i)
 	if ((tmp = get_env_variable(word)) == NULL)
 	{
 		ft_strdel(&word);
+		ft_strnclr(&str[i - (k + 1)], k);
+		ft_memmove(&str[i - (k + 1)], &str[i], j = ft_strlen(&str[i]));
+		ft_strnclr(&str[i - (k + 1) + j], j);
 		return (FAIL_OK);
 	}
 	k = ft_strlen(tmp);

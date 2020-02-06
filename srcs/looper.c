@@ -6,7 +6,7 @@
 /*   By: tlandema <tlandema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 14:08:27 by tlandema          #+#    #+#             */
-/*   Updated: 2020/02/05 14:30:29 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/06 16:23:51 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,9 @@ int8_t			looper(void)
 		if (arg_tab)
 			if ((line_parser(arg_tab)) == FAILURE)
 				return (FAILURE);
+		ft_tabdel(arg_tab);
 	}
+	ft_tabdel(command_tab);
 	ft_strclr(g_env.str);
 	return (SUCCESS);
 }

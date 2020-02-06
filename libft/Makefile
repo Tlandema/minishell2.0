@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tlandema <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: tlandema <tlandema@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by tlandema          #+#    #+#              #
-#    Updated: 2020/01/26 07:01:29 by tlandema         ###   ########.fr        #
+#    Updated: 2020/02/06 14:41:38 by tlandema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ INC = includes
 SRCS_PATH = srcs
 
 SRCS = get_next_line.c \
+	   ft_strnclr.c \
 	   ft_stristr.c \
 	   ft_str_join.c \
 	   ft_atoli.c \
