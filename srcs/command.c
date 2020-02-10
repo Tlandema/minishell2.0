@@ -6,7 +6,7 @@
 /*   By: tlandema <tlandema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 15:17:59 by tlandema          #+#    #+#             */
-/*   Updated: 2020/02/06 11:28:11 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/07 16:37:29 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,15 @@ static int8_t	check_and_exec(char **com_arg, char **paths)
 	if ((check = access(com_arg[0], X_OK)) == SUCCESS)
 	{
 		if (fork() == SUCCESS)
+		{
 			execve(com_arg[0], com_arg, g_env.v_env);
+			ft_tabdel(paths);
+		}
 		else
 			wait(0);
 	}
 	else if (paths)
-		check = exec_helper(com_arg, paths, FAILURE);
+		check = exec_helper(com_arg, paths, -1);
 	if (check == FAILURE)
 		check = 4;
 	return (check);
@@ -81,11 +84,11 @@ int8_t			command_parsing(char **arg)
 	{
 		if ((paths = ft_strsplit(paths_tmp, ':')) == NULL)
 			return (FAILURE);
+		ft_strdel(&paths_tmp);
 	}
 	if ((check = check_and_exec(arg, paths)) != SUCCESS)
 		error_message(check, arg[0]);
 	if (paths)
 		ft_tabdel(paths);
-	ft_strdel(&paths_tmp);
 	return (SUCCESS);
 }

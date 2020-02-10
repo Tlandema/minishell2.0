@@ -6,7 +6,7 @@
 /*   By: tlandema <tlandema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 09:49:27 by tlandema          #+#    #+#             */
-/*   Updated: 2020/02/06 15:29:08 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/10 08:32:22 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int8_t	searching_in_dir(char *to_match, char *dir_name, char **add)
 	if (len == 0)
 		return (SUCCESS);
 	if (!(dirp = opendir(dir_name)))
-		return (FAILURE);
+		return (FAIL_OK);
 	while ((dp = readdir(dirp)) != NULL && *add == NULL)
 	{
 		if (!ft_strncmp(to_match, dp->d_name, len))

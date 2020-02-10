@@ -6,11 +6,12 @@
 /*   By: tlandema <tlandema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 06:12:25 by tlandema          #+#    #+#             */
-/*   Updated: 2020/02/06 17:00:10 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/10 10:26:32 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <stdio.h>
 
 static int8_t	dollar_replacer(char *str, int i)
 {
@@ -19,25 +20,26 @@ static int8_t	dollar_replacer(char *str, int i)
 	char	*tmp;
 	char	*word;
 
-	j = i;
 	k = 0;
-	while (str[++i] && (str[i] != ' ' && str[i] != '\'' && str[i] != '\"'))
+	while (str[k] && str[k] != ' ' && str[k]!= '\"')
 		k++;
-	if (!(word = ft_strndup(&str[j + 1], k)))
+	if (!(word = ft_strndup(str + 1, k - 1)))
 		return (FAILURE);
 	if ((tmp = get_env_variable(word)) == NULL)
 	{
 		ft_strdel(&word);
-		ft_strnclr(&str[i - (k + 1)], k);
-		ft_memmove(&str[i - (k + 1)], &str[i], j = ft_strlen(&str[i]));
-		ft_strnclr(&str[i - (k + 1) + j], j);
+		ft_strnclr(str, k);
+		ft_memmove(str, str + k, j = ft_strlen(str + k));
+		ft_strclr(str + j);
 		return (FAIL_OK);
 	}
-	k = ft_strlen(tmp);
-	ft_memmove(&str[j + k], &str[i], ft_strlen(&str[i]));
-	ft_strncpy(&str[j], tmp, k);
-	ft_strdel(&tmp);
 	ft_strdel(&word);
+	j = ft_strlen(tmp);
+	ft_strnclr(str, k);
+	ft_memmove(str + j, str + k, i = ft_strlen(str + k));
+	ft_strncpy(str, tmp, j);
+	ft_strclr(str + j + i);
+	ft_strdel(&tmp);
 	return (SUCCESS);
 }
 
@@ -68,7 +70,7 @@ int8_t			variable_assigner(void)
 			return (SUCCESS);
 		if (str[i] == '$' && (str[i + 1] != ' ' && str[i + 1] != '\0'))
 		{
-			if (dollar_replacer(str, i) == FAILURE)
+			if (dollar_replacer(&str[i], 0) == FAILURE)
 				return (FAILURE);
 		}
 		else if (str[i] == '~')
