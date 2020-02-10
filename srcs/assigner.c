@@ -6,12 +6,18 @@
 /*   By: tlandema <tlandema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 06:12:25 by tlandema          #+#    #+#             */
-/*   Updated: 2020/02/10 10:26:32 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/10 10:32:56 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <stdio.h>
+
+static int8_t	ret_free_in_assign(char *to_free1, char *to_free2)
+{
+	ft_strdel(&to_free1);
+	ft_strdel(&to_free2);
+	return (SUCCESS);
+}
 
 static int8_t	dollar_replacer(char *str, int i)
 {
@@ -21,7 +27,7 @@ static int8_t	dollar_replacer(char *str, int i)
 	char	*word;
 
 	k = 0;
-	while (str[k] && str[k] != ' ' && str[k]!= '\"')
+	while (str[k] && str[k] != ' ' && str[k] != '\"')
 		k++;
 	if (!(word = ft_strndup(str + 1, k - 1)))
 		return (FAILURE);
@@ -33,14 +39,12 @@ static int8_t	dollar_replacer(char *str, int i)
 		ft_strclr(str + j);
 		return (FAIL_OK);
 	}
-	ft_strdel(&word);
 	j = ft_strlen(tmp);
 	ft_strnclr(str, k);
 	ft_memmove(str + j, str + k, i = ft_strlen(str + k));
 	ft_strncpy(str, tmp, j);
 	ft_strclr(str + j + i);
-	ft_strdel(&tmp);
-	return (SUCCESS);
+	return (ret_free_in_assign(word, tmp));
 }
 
 static int8_t	tild_replacer(char *str, int i)
